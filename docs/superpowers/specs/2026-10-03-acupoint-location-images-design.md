@@ -134,7 +134,7 @@ BL40.svg
 
 1. 15 个穴位均有 `image` 和非空 `imageAlt`。
 2. 15 个图片路径唯一且对应文件真实存在。
-3. SVG 文件不含 `http://`、`https://`、`<script>`、`<foreignObject>` 或嵌入式位图。
+3. SVG 文件除标准命名空间声明外，不含远程 `href`/`src` 引用、`<script>`、`<foreignObject>` 或嵌入式位图。
 4. SVG 均包含 `viewBox`，并使用统一定位点类名。
 5. 结果卡片正确渲染 `<figure>`、图片路径和替代文字。
 6. 图片触发 `error` 时隐藏图框，文字结果仍存在。
