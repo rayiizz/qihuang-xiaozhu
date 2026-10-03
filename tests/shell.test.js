@@ -13,6 +13,7 @@ test("document contains every application view", () => {
     "view-regions",
     "view-symptoms",
     "view-result",
+    "view-disclaimer",
   ]) {
     assert.match(html, new RegExp(`id=["']${id}["']`));
   }
@@ -62,4 +63,25 @@ test("acupoint figures preserve the full SVG and remain responsive", () => {
   assert.match(css, /\.point-figure img\s*\{/);
   assert.match(css, /object-fit:\s*contain/);
   assert.match(css, /aspect-ratio:\s*3\s*\/\s*2/);
+});
+
+test("document exposes the approved disclaimer through a shared footer link", () => {
+  const disclaimerStart = html.indexOf('id="view-disclaimer"');
+  const disclaimerEnd = html.indexOf("</main>", disclaimerStart);
+  const disclaimerView = html.slice(disclaimerStart, disclaimerEnd);
+
+  assert.ok(disclaimerStart > -1, "disclaimer view must exist");
+  assert.match(html, /<footer[^>]+class=["']site-footer["']/);
+  assert.match(html, /<a[^>]+href=["']#view-disclaimer["'][^>]+data-action=["']open-disclaimer["']/);
+  assert.match(disclaimerView, /免责声明与使用须知/);
+  assert.match(disclaimerView, /“在线问诊”仅为功能名称/);
+  assert.match(disclaimerView, /不构成医学诊断、处方、个体化治疗方案或疗效保证/);
+  assert.match(disclaimerView, /立即停止自行处理并联系当地急救服务/);
+  assert.match(disclaimerView, /不指导针刺、放血、艾灸/);
+  assert.match(disclaimerView, /孕妇、儿童、老年人/);
+  assert.match(disclaimerView, /尚未经过执业中医师逐项审核/);
+  assert.match(disclaimerView, /不会主动上传或保存/);
+  assert.match(disclaimerView, /法律规定不得排除或限制的责任/);
+  assert.match(disclaimerView, /最后更新：2026年10月3日/);
+  assert.match(disclaimerView, /data-action=["']home["']/);
 });
