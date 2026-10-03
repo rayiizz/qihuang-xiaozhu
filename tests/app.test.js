@@ -36,3 +36,15 @@ test("region filtering is isolated and unknown regions return an empty list", ()
   assert.ok(items.every((item) => item.regionId === "chest-abdomen"));
   assert.deepEqual(app.getSymptoms(data, "missing"), []);
 });
+
+test("result view model resolves display names and safe fallback", () => {
+  const ready = app.buildViewModel({ view: "result", regionId: "head-face", symptomId: "mild-headache" }, data);
+  assert.equal(ready.region.name, "头面部");
+  assert.equal(ready.symptom.name, "轻微头痛");
+  assert.equal(ready.acupoints.length, 3);
+
+  const broken = app.buildViewModel({ view: "result", regionId: "missing", symptomId: "missing" }, data);
+  assert.equal(broken.region, null);
+  assert.equal(broken.symptom, null);
+  assert.deepEqual(broken.acupoints, []);
+});

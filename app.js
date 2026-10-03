@@ -49,7 +49,111 @@
     }
   }
 
-  function mount() {}
+  function buildViewModel(state, data) {
+    const region = data.bodyRegions.find((item) => item.id === state.regionId) || null;
+    const symptom = data.symptoms.find((item) => item.id === state.symptomId) || null;
+    return {
+      ...state,
+      region,
+      symptom,
+      symptoms: getSymptoms(data, state.regionId),
+      acupoints: getAcupoints(data, state.symptomId),
+    };
+  }
 
-  return { createInitialState, getSymptoms, getAcupoints, reduce, mount };
+  function makeButton(doc, item, action) {
+    const button = doc.createElement("button");
+    button.type = "button";
+    button.className = "option-card";
+    button.dataset.action = action;
+    button.dataset.id = item.id;
+    const title = doc.createElement("strong");
+    title.textContent = item.name;
+    button.appendChild(title);
+    if (item.hint) {
+      const hint = doc.createElement("span");
+      hint.textContent = item.hint;
+      button.appendChild(hint);
+    }
+    return button;
+  }
+
+  function mount(doc, data) {
+    if (!data) return;
+    let state = createInitialState();
+    const views = Array.from(doc.querySelectorAll("[data-view]"));
+    const regionOptions = doc.querySelector("#region-options");
+    const symptomOptions = doc.querySelector("#symptom-options");
+    const pointResults = doc.querySelector("#acupoint-results");
+    const symptomEmpty = doc.querySelector("#symptom-empty");
+    const resultEmpty = doc.querySelector("#result-empty");
+    const redFlagList = doc.querySelector("#red-flag-list");
+
+    data.safetyNotices.redFlags.forEach((message) => {
+      const item = doc.createElement("li");
+      item.textContent = message;
+      redFlagList.appendChild(item);
+    });
+
+    function render() {
+      const model = buildViewModel(state, data);
+      views.forEach((view) => {
+        const active = view.dataset.view === state.view;
+        view.hidden = !active;
+        view.classList.toggle("is-active", active);
+      });
+
+      if (state.view === "regions") {
+        regionOptions.replaceChildren(...data.bodyRegions.map((item) => makeButton(doc, item, "select-region")));
+      }
+
+      if (state.view === "symptoms") {
+        doc.querySelector("#selected-region").textContent = model.region ? model.region.name : "";
+        symptomOptions.replaceChildren(...model.symptoms.map((item) => makeButton(doc, item, "select-symptom")));
+        symptomEmpty.hidden = model.symptoms.length > 0;
+      }
+
+      if (state.view === "result") {
+        doc.querySelector("#result-summary").textContent = model.symptom ? `你选择了：${model.symptom.name}` : "";
+        const cards = model.acupoints.map((point) => {
+          const article = doc.createElement("article");
+          article.className = "point-card";
+          const heading = doc.createElement("h2");
+          heading.textContent = point.name;
+          const location = doc.createElement("p");
+          location.textContent = point.location;
+          const caution = doc.createElement("small");
+          caution.textContent = point.caution;
+          article.append(heading, location, caution);
+          return article;
+        });
+        pointResults.replaceChildren(...cards);
+        resultEmpty.hidden = cards.length > 0;
+      }
+
+      const activeHeading = doc.querySelector(`[data-view="${state.view}"] h1`);
+      if (activeHeading) activeHeading.focus();
+    }
+
+    doc.addEventListener("click", (event) => {
+      const control = event.target.closest("[data-action]");
+      if (!control) return;
+      const actionMap = {
+        "open-consultation": "OPEN_CONSULTATION",
+        "open-product": "OPEN_PRODUCT",
+        "accept-safety": "ACCEPT_SAFETY",
+        "select-region": "SELECT_REGION",
+        "select-symptom": "SELECT_SYMPTOM",
+        back: "BACK",
+        restart: "RESTART",
+        home: "HOME",
+      };
+      state = reduce(state, { type: actionMap[control.dataset.action], id: control.dataset.id }, data);
+      render();
+    });
+
+    render();
+  }
+
+  return { createInitialState, getSymptoms, getAcupoints, reduce, buildViewModel, mount };
 });
