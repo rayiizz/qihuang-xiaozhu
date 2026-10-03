@@ -78,6 +78,37 @@
     return button;
   }
 
+  function createPointCard(doc, point) {
+    const article = doc.createElement("article");
+    article.className = "point-card";
+
+    const heading = doc.createElement("h2");
+    heading.textContent = point.name;
+
+    const figure = doc.createElement("figure");
+    figure.className = "point-figure";
+    const caption = doc.createElement("figcaption");
+    caption.textContent = "位置示意图";
+    const image = doc.createElement("img");
+    image.src = point.image;
+    image.alt = point.imageAlt;
+    image.loading = "lazy";
+    image.decoding = "async";
+    image.addEventListener("error", function () {
+      figure.hidden = true;
+    }, { once: true });
+    figure.append(caption, image);
+
+    const location = doc.createElement("p");
+    location.className = "point-location";
+    location.textContent = point.location;
+
+    const caution = doc.createElement("small");
+    caution.textContent = point.caution;
+    article.append(heading, figure, location, caution);
+    return article;
+  }
+
   function mount(doc, data) {
     if (!data) {
       const appError = doc.querySelector("#app-error");
@@ -122,18 +153,7 @@
 
       if (state.view === "result") {
         doc.querySelector("#result-summary").textContent = model.symptom ? `你选择了：${model.symptom.name}` : "";
-        const cards = model.acupoints.map((point) => {
-          const article = doc.createElement("article");
-          article.className = "point-card";
-          const heading = doc.createElement("h2");
-          heading.textContent = point.name;
-          const location = doc.createElement("p");
-          location.textContent = point.location;
-          const caution = doc.createElement("small");
-          caution.textContent = point.caution;
-          article.append(heading, location, caution);
-          return article;
-        });
+        const cards = model.acupoints.map((point) => createPointCard(doc, point));
         pointResults.replaceChildren(...cards);
         resultEmpty.hidden = cards.length > 0;
       }
@@ -162,5 +182,5 @@
     render();
   }
 
-  return { createInitialState, getSymptoms, getAcupoints, reduce, buildViewModel, mount };
+  return { createInitialState, getSymptoms, getAcupoints, reduce, buildViewModel, createPointCard, mount };
 });

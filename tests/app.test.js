@@ -66,3 +66,41 @@ test("mount reveals a static error and disables data-dependent controls when dat
   assert.equal(appError.hidden, false);
   assert.ok(controls.every((control) => control.disabled));
 });
+
+class FakeElement {
+  constructor(tagName) {
+    this.tagName = tagName;
+    this.children = [];
+    this.listeners = {};
+    this.dataset = {};
+    this.hidden = false;
+    this.className = "";
+    this.textContent = "";
+  }
+  append(...children) { this.children.push(...children); }
+  appendChild(child) { this.children.push(child); return child; }
+  addEventListener(type, listener) { this.listeners[type] = listener; }
+  dispatch(type) { if (this.listeners[type]) this.listeners[type](); }
+}
+
+function flatten(element) {
+  return [element, ...element.children.flatMap(flatten)];
+}
+
+test("point card renders an accessible figure and hides only the figure on image error", () => {
+  const doc = { createElement: (tag) => new FakeElement(tag) };
+  const point = data.acupoints.find((item) => item.id === "LI4");
+  const card = app.createPointCard(doc, point);
+  const nodes = flatten(card);
+  const figure = nodes.find((item) => item.tagName === "figure");
+  const image = nodes.find((item) => item.tagName === "img");
+  const location = nodes.find((item) => item.className === "point-location");
+
+  assert.equal(image.src, point.image);
+  assert.equal(image.alt, point.imageAlt);
+  assert.equal(image.loading, "lazy");
+  assert.equal(figure.hidden, false);
+  image.dispatch("error");
+  assert.equal(figure.hidden, true);
+  assert.equal(location.textContent, point.location);
+});
