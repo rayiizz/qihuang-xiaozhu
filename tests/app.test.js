@@ -48,3 +48,21 @@ test("result view model resolves display names and safe fallback", () => {
   assert.equal(broken.symptom, null);
   assert.deepEqual(broken.acupoints, []);
 });
+
+test("mount reveals a static error and disables data-dependent controls when data is missing", () => {
+  const appError = { hidden: true };
+  const controls = [{ disabled: false }, { disabled: false }];
+  const doc = {
+    querySelector(selector) {
+      return selector === "#app-error" ? appError : null;
+    },
+    querySelectorAll(selector) {
+      return selector === "[data-requires-data]" ? controls : [];
+    },
+  };
+
+  app.mount(doc, null);
+
+  assert.equal(appError.hidden, false);
+  assert.ok(controls.every((control) => control.disabled));
+});

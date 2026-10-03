@@ -16,6 +16,7 @@
 
   <main id="main-content" class="app-shell">
     <p class="review-banner" role="status">演示内容尚未完成专业审核</p>
+    <p id="app-error" class="empty-state" role="alert" hidden>问诊数据未能加载，请确认 data.js 与 index.html 位于同一文件夹后刷新页面。</p>
 
     <section id="view-home" class="view is-active" data-view="home" aria-labelledby="home-title">
       <div class="hero-copy">
@@ -24,7 +25,7 @@
         <p>完全离线运行，不上传你的选择。内容仅作健康知识参考。</p>
       </div>
       <div class="entry-grid">
-        <button class="entry-card entry-card--primary" type="button" data-action="open-consultation">
+        <button class="entry-card entry-card--primary" type="button" data-action="open-consultation" data-requires-data>
           <span class="entry-kicker">主要入口</span>
           <span class="entry-title">在线问诊</span>
           <span>逐步选择不适部位与具体感受</span>
@@ -46,6 +47,7 @@
         <article><h2>产品理念</h2><p>把复杂的穴位知识整理为清楚、克制、易理解的日常参考。</p></article>
         <article><h2>主要能力</h2><p>通过部位与不适的逐步选择，展示简洁的穴位名称和定位。</p></article>
         <article><h2>隐私方式</h2><p>网页完全在本机运行，不要求账号，不保存或上传当次选择。</p></article>
+        <article><h2>适用范围</h2><p>面向常见、轻微且非紧急不适的日常穴位知识查询。</p></article>
         <article><h2>使用边界</h2><p>不诊断疾病，不处理急症，不替代医生或专业治疗。</p></article>
       </div>
     </section>
@@ -56,7 +58,7 @@
       <h1 id="safety-title" tabindex="-1">以下情况请停止自助查询并及时就医</h1>
       <ul id="red-flag-list" class="warning-list"></ul>
       <div class="notice">不要按压破损、感染、红肿或明显疼痛的皮肤；孕期或有严重基础疾病时先咨询专业人员。</div>
-      <button class="primary-button" type="button" data-action="accept-safety">我已了解，继续</button>
+      <button class="primary-button" type="button" data-action="accept-safety" data-requires-data>我已了解，继续</button>
     </section>
 
     <section id="view-regions" class="view" data-view="regions" aria-labelledby="regions-title" hidden>
@@ -90,7 +92,16 @@
     </section>
   </main>
 
-  <noscript><p class="noscript">问诊功能需要启用 JavaScript。你仍可阅读本页的产品定位与安全说明。</p></noscript>
+  <noscript>
+    <section class="noscript" aria-labelledby="noscript-title">
+      <h2 id="noscript-title">本地穴位参考工具</h2>
+      <p><strong>问诊功能需要启用 JavaScript。</strong>启用后可逐步选择不适部位与具体感受。</p>
+      <h3>产品定位</h3>
+      <p>这是一款完全离线的日常轻微不适穴位知识参考工具，不要求账号，也不上传你的选择。</p>
+      <h3>安全提醒</h3>
+      <p>仅供日常健康知识参考，不构成诊断或治疗建议。若出现胸痛、呼吸困难、突然偏瘫、意识异常或其他紧急不适，请停止自助查询并立即就医或联系急救。</p>
+    </section>
+  </noscript>
   <script src="data.js"></script>
   <script src="app.js"></script>
 </body>

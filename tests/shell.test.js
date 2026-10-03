@@ -34,6 +34,20 @@ test("document includes safety, keyboard, and no-script affordances", () => {
   assert.match(html, /<button[^>]+data-action=/);
 });
 
+test("document includes static missing-data and substantive no-script fallbacks", () => {
+  assert.match(html, /id=["']app-error["'][^>]*hidden/);
+  const noScript = html.match(/<noscript>([\s\S]*?)<\/noscript>/i)?.[1] || "";
+  assert.match(noScript, /产品定位/);
+  assert.match(noScript, /安全提醒/);
+  assert.match(noScript, /仅供日常健康知识参考/);
+  assert.match(noScript, /问诊功能需要启用 JavaScript/);
+});
+
+test("product introduction includes the agreed applicable-scope section", () => {
+  const productView = html.match(/id=["']view-product["'][\s\S]*?<\/section>/i)?.[0] || "";
+  assert.match(productView, /<h2>适用范围<\/h2>/);
+});
+
 test("stylesheet includes responsive, focus, hidden, and reduced-motion rules", () => {
   const css = fs.readFileSync(path.join(__dirname, "..", "styles.css"), "utf8");
   assert.match(css, /\[hidden\]/);

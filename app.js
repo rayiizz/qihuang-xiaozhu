@@ -79,7 +79,14 @@
   }
 
   function mount(doc, data) {
-    if (!data) return;
+    if (!data) {
+      const appError = doc.querySelector("#app-error");
+      if (appError) appError.hidden = false;
+      Array.from(doc.querySelectorAll("[data-requires-data]")).forEach((control) => {
+        control.disabled = true;
+      });
+      return;
+    }
     let state = createInitialState();
     const views = Array.from(doc.querySelectorAll("[data-view]"));
     const regionOptions = doc.querySelector("#region-options");
