@@ -85,3 +85,14 @@ test("document exposes the approved disclaimer through a shared footer link", ()
   assert.match(disclaimerView, /最后更新：2026年10月3日/);
   assert.match(disclaimerView, /data-action=["']home["']/);
 });
+
+test("disclaimer and shared footer have readable responsive styles", () => {
+  const css = fs.readFileSync(path.join(__dirname, "..", "styles.css"), "utf8");
+
+  assert.match(css, /\.site-footer\s*\{/);
+  assert.match(css, /\.footer-link\s*\{/);
+  assert.match(css, /\.disclaimer-sections\s*\{/);
+  assert.match(css, /\.disclaimer-sections\s*>\s*\.disclaimer-section--urgent\s*\{/);
+  assert.match(css, /\.disclaimer-view\s*>\s*\.primary-button/);
+  assert.match(css, /@media\s*\(max-width:\s*700px\)[\s\S]*\.disclaimer-sections/);
+});
