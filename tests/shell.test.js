@@ -55,3 +55,11 @@ test("stylesheet includes responsive, focus, hidden, and reduced-motion rules", 
   assert.match(css, /@media\s*\(max-width:\s*700px\)/);
   assert.match(css, /prefers-reduced-motion:\s*reduce/);
 });
+
+test("acupoint figures preserve the full SVG and remain responsive", () => {
+  const css = fs.readFileSync(path.join(__dirname, "..", "styles.css"), "utf8");
+  assert.match(css, /\.point-figure\s*\{/);
+  assert.match(css, /\.point-figure img\s*\{/);
+  assert.match(css, /object-fit:\s*contain/);
+  assert.match(css, /aspect-ratio:\s*3\s*\/\s*2/);
+});

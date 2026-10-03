@@ -554,6 +554,46 @@ p {
   content: "";
 }
 
+.point-figure {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  margin: 0 0 1rem;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 0.85rem;
+  background:
+    linear-gradient(135deg, rgba(162, 68, 50, 0.025), transparent 42%),
+    var(--paper-bright);
+  box-shadow: inset 0 0 0 1px rgba(255, 253, 247, 0.62);
+}
+
+.point-figure figcaption {
+  position: absolute;
+  z-index: 1;
+  top: 0.65rem;
+  left: 0.65rem;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid rgba(162, 68, 50, 0.16);
+  border-radius: 999px;
+  color: var(--cinnabar-deep);
+  background: rgba(251, 248, 240, 0.9);
+  box-shadow: 0 0.25rem 0.7rem rgba(31, 51, 44, 0.06);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.point-figure img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.point-location {
+  min-height: 3.5em;
+}
+
 .point-card small {
   display: block;
   margin-top: 1rem;
@@ -706,6 +746,10 @@ a:focus-visible,
   .info-grid article,
   .point-card {
     min-height: auto;
+  }
+
+  .point-location {
+    min-height: 0;
   }
 
   .warning-list {
