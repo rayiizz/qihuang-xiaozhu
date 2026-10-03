@@ -30,6 +30,14 @@ test("back, restart, product, and home transitions are deterministic", () => {
   assert.deepEqual(app.reduce(result, { type: "HOME" }, data), app.createInitialState());
 });
 
+test("disclaimer opens from any flow and returns home without retaining selections", () => {
+  const result = { view: "result", regionId: "head-face", symptomId: "mild-headache" };
+  const disclaimer = app.reduce(result, { type: "OPEN_DISCLAIMER" }, data);
+
+  assert.deepEqual(disclaimer, { view: "disclaimer", regionId: null, symptomId: null });
+  assert.deepEqual(app.reduce(disclaimer, { type: "HOME" }, data), app.createInitialState());
+});
+
 test("region filtering is isolated and unknown regions return an empty list", () => {
   const items = app.getSymptoms(data, "chest-abdomen");
   assert.equal(items.length, 3);

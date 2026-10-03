@@ -29,6 +29,7 @@
     switch (event.type) {
       case "OPEN_CONSULTATION": return { view: "safety", regionId: null, symptomId: null };
       case "OPEN_PRODUCT": return { view: "product", regionId: null, symptomId: null };
+      case "OPEN_DISCLAIMER": return { view: "disclaimer", regionId: null, symptomId: null };
       case "ACCEPT_SAFETY": return { view: "regions", regionId: null, symptomId: null };
       case "SELECT_REGION": {
         const exists = data.bodyRegions.some((item) => item.id === event.id);
@@ -168,6 +169,7 @@
       const actionMap = {
         "open-consultation": "OPEN_CONSULTATION",
         "open-product": "OPEN_PRODUCT",
+        "open-disclaimer": "OPEN_DISCLAIMER",
         "accept-safety": "ACCEPT_SAFETY",
         "select-region": "SELECT_REGION",
         "select-symptom": "SELECT_SYMPTOM",
