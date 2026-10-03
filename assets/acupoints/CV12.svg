@@ -8,12 +8,15 @@
     .landmark-fill{fill:#a9967e}
     .leader{fill:none;stroke:#a24432;stroke-width:3}
     .acupoint-marker{fill:#a24432;stroke:#f2c8b7;stroke-width:9}
-    text{fill:#28443a;font:16px sans-serif}.label{font-weight:700}.tag{font-size:13px;fill:#75685d}
+    text{fill:#28443a;font:16px sans-serif}.label{font-weight:700}.tag,.orientation,.landmark-label{font-size:13px;fill:#75685d}.landmark-label{font-weight:700}
   </style>
   <rect width="480" height="320" rx="24" fill="#fbf8f0"/>
   <text class="tag" x="24" y="30">位置示意图 · 未完成专业审核</text>
+  <text class="orientation" x="456" y="30" text-anchor="end">前正中线</text>
   <path class="body" d="M130 37 Q240 8 350 37 L368 286 L112 286 Z"/>
     <path class="landmark" d="M240 38 L240 282"/>
+    <path class="landmark" d="M218 55 L240 76 L262 55"/>
+    <text class="landmark-label" x="273" y="64">胸骨下端</text>
     <circle class="landmark-fill" cx="240" cy="215" r="9"/>
     <text x="117" y="309">上腹部 · 前正中线与肚脐</text>
   <path class="leader" d="M240 145 L374 111"/>

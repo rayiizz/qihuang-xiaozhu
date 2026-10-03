@@ -8,12 +8,16 @@
     .landmark-fill{fill:#a9967e}
     .leader{fill:none;stroke:#a24432;stroke-width:3}
     .acupoint-marker{fill:#a24432;stroke:#f2c8b7;stroke-width:9}
-    text{fill:#28443a;font:16px sans-serif}.label{font-weight:700}.tag{font-size:13px;fill:#75685d}
+    text{fill:#28443a;font:16px sans-serif}.label{font-weight:700}.tag,.orientation,.landmark-label{font-size:13px;fill:#75685d}.landmark-label{font-weight:700}
   </style>
   <rect width="480" height="320" rx="24" fill="#fbf8f0"/>
   <text class="tag" x="24" y="30">位置示意图 · 未完成专业审核</text>
+  <text class="orientation" x="456" y="30" text-anchor="end">左右同取 · 足底</text>
   <path class="body" d="M171 289 C128 270 111 231 122 190 C131 155 149 134 151 98 C154 52 183 29 222 37 C262 45 287 82 295 126 C305 182 282 248 239 284 C219 300 193 300 171 289 Z"/>
     <path class="landmark" d="M156 122 Q214 144 284 125 M149 170 Q211 190 279 170"/>
+    <text class="landmark-label" x="293" y="126">趾根</text>
+    <path class="landmark" d="M266 193 Q255 226 231 250"/>
+    <text class="landmark-label" x="273" y="231">足弓</text>
     <text x="143" y="310">足底前部 · 左右同取</text>
   <path class="leader" d="M213 157 L356 111"/>
   <circle class="acupoint-marker" cx="213" cy="157" r="9"/>

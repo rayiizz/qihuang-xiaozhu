@@ -22,3 +22,30 @@ test("all acupoint SVGs are local, static, and structurally consistent", () => {
     assert.doesNotMatch(svg, /[ \t]+$/m);
   }
 });
+
+test("each acupoint SVG states bilateral orientation and required landmarks", () => {
+  const read = (id) => fs.readFileSync(path.join(__dirname, "..", "assets", "acupoints", `${id}.svg`), "utf8");
+
+  for (const id of ["LI4", "EX-HN5", "GB20", "LI20", "HT7", "GB21", "SI3", "LI10", "PC6", "ST36", "GB34", "KI1", "BL40"]) {
+    assert.match(read(id), /左右同取/, `${id} must state that the bilateral point is located on both sides`);
+  }
+
+  const requiredLabels = {
+    HT7: ["前臂掌侧"],
+    PC6: ["前臂掌侧"],
+    LI10: ["前臂背侧"],
+    SI3: ["第五掌指关节"],
+    ST36: ["腓骨小头"],
+    GB34: ["腓骨小头"],
+    CV12: ["胸骨下端"],
+    KI1: ["趾根", "足弓"],
+    BL40: ["膝后部"],
+  };
+
+  for (const [id, labels] of Object.entries(requiredLabels)) {
+    const svg = read(id);
+    for (const label of labels) {
+      assert.match(svg, new RegExp(label), `${id} must identify ${label}`);
+    }
+  }
+});

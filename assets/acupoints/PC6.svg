@@ -8,13 +8,14 @@
     .landmark-fill{fill:#a9967e}
     .leader{fill:none;stroke:#a24432;stroke-width:3}
     .acupoint-marker{fill:#a24432;stroke:#f2c8b7;stroke-width:9}
-    text{fill:#28443a;font:16px sans-serif}.label{font-weight:700}.tag{font-size:13px;fill:#75685d}
+    text{fill:#28443a;font:16px sans-serif}.label{font-weight:700}.tag,.orientation,.landmark-label{font-size:13px;fill:#75685d}.landmark-label{font-weight:700}
   </style>
   <rect width="480" height="320" rx="24" fill="#fbf8f0"/>
   <text class="tag" x="24" y="30">位置示意图 · 未完成专业审核</text>
+  <text class="orientation" x="456" y="30" text-anchor="end">左右同取 · 前臂掌侧</text>
   <path class="body" d="M105 75 Q143 45 181 58 L364 126 Q402 142 390 181 L360 253 Q347 283 313 272 L124 208 Q82 193 82 152 Z"/>
     <path class="landmark" d="M112 190 Q231 213 349 252 M128 169 Q242 191 365 226 M195 99 L153 205 M234 111 L194 217"/>
-    <text x="92" y="305">前臂与腕部 · 掌侧/背侧见标注</text>
+    <text x="92" y="305">前臂与腕部 · 肘横纹与腕横纹</text>
   <path class="leader" d="M282 207 L405 181"/>
   <circle class="acupoint-marker" cx="282" cy="207" r="9"/>
   <rect x="367" y="157" width="76" height="34" rx="10" fill="#17382f"/>
