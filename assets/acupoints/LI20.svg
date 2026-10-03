@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" role="img" aria-labelledby="title desc">
+  <title id="title">迎香位置示意图</title>
+  <desc id="desc">局部轮廓、定位标志和迎香定位点示意，正式使用前需专业审核。</desc>
+  <style>
+    .body{fill:#efe0c9;stroke:#4f463d;stroke-width:4;stroke-linejoin:round}
+    .landmark{fill:none;stroke:#a9967e;stroke-width:3;stroke-linecap:round;stroke-dasharray:7 7}
+    .landmark-fill{fill:#a9967e}
+    .leader{fill:none;stroke:#a24432;stroke-width:3}
+    .acupoint-marker{fill:#a24432;stroke:#f2c8b7;stroke-width:9}
+    text{fill:#28443a;font:16px sans-serif}.label{font-weight:700}.tag{font-size:13px;fill:#75685d}
+  </style>
+  <rect width="480" height="320" rx="24" fill="#fbf8f0"/>
+  <text class="tag" x="24" y="30">位置示意图 · 未完成专业审核</text>
+  <path class="body" d="M149 278 C121 232 113 169 127 111 C143 57 187 30 240 31 C293 30 337 57 353 111 C367 169 359 232 331 278 Z"/>
+    <path class="landmark" d="M159 127 Q195 108 222 127 M258 127 Q285 108 321 127 M240 117 L240 204 M209 221 Q240 237 271 221"/>
+    <path class="landmark" d="M219 190 Q205 208 193 229 M261 190 Q275 208 287 229"/>
+    <text x="96" y="304">正面面部 · 两侧对称</text>
+  <path class="leader" d="M275 193 L373 172"/>
+  <circle class="acupoint-marker" cx="275" cy="193" r="9"/>
+  <rect x="335" y="148" width="76" height="34" rx="10" fill="#17382f"/>
+  <text class="label" x="373" y="170" text-anchor="middle" fill="#fffaf2">迎香</text>
+</svg>
