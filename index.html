@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="完全离线的日常穴位知识参考工具">
+  <title>岐黄小助｜本地穴位参考</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+  <header class="site-header">
+    <button class="brand" type="button" data-action="home" aria-label="返回首页">岐黄小助</button>
+    <span class="local-badge">本地运行 · 隐私优先</span>
+  </header>
+
+  <main id="main-content" class="app-shell">
+    <p class="review-banner" role="status">演示内容尚未完成专业审核</p>
+
+    <section id="view-home" class="view is-active" data-view="home" aria-labelledby="home-title">
+      <div class="hero-copy">
+        <p class="eyebrow">日常轻微不适的穴位参考</p>
+        <h1 id="home-title" tabindex="-1">从一处不适开始，找到一份温和参考。</h1>
+        <p>完全离线运行，不上传你的选择。内容仅作健康知识参考。</p>
+      </div>
+      <div class="entry-grid">
+        <button class="entry-card entry-card--primary" type="button" data-action="open-consultation">
+          <span class="entry-kicker">主要入口</span>
+          <span class="entry-title">在线问诊</span>
+          <span>逐步选择不适部位与具体感受</span>
+        </button>
+        <button class="entry-card" type="button" data-action="open-product">
+          <span class="entry-kicker">了解更多</span>
+          <span class="entry-title">产品介绍</span>
+          <span>了解理念、能力、隐私与使用边界</span>
+        </button>
+      </div>
+      <p class="legal-note">仅供日常健康知识参考，不构成诊断或治疗建议。</p>
+    </section>
+
+    <section id="view-product" class="view" data-view="product" aria-labelledby="product-title" hidden>
+      <button class="text-button" type="button" data-action="back">← 返回</button>
+      <p class="eyebrow">产品介绍</p>
+      <h1 id="product-title" tabindex="-1">一款尊重隐私边界的本地参考工具</h1>
+      <div class="info-grid">
+        <article><h2>产品理念</h2><p>把复杂的穴位知识整理为清楚、克制、易理解的日常参考。</p></article>
+        <article><h2>主要能力</h2><p>通过部位与不适的逐步选择，展示简洁的穴位名称和定位。</p></article>
+        <article><h2>隐私方式</h2><p>网页完全在本机运行，不要求账号，不保存或上传当次选择。</p></article>
+        <article><h2>使用边界</h2><p>不诊断疾病，不处理急症，不替代医生或专业治疗。</p></article>
+      </div>
+    </section>
+
+    <section id="view-safety" class="view" data-view="safety" aria-labelledby="safety-title" hidden>
+      <button class="text-button" type="button" data-action="back">← 返回</button>
+      <p class="eyebrow">开始前请确认</p>
+      <h1 id="safety-title" tabindex="-1">以下情况请停止自助查询并及时就医</h1>
+      <ul id="red-flag-list" class="warning-list"></ul>
+      <div class="notice">不要按压破损、感染、红肿或明显疼痛的皮肤；孕期或有严重基础疾病时先咨询专业人员。</div>
+      <button class="primary-button" type="button" data-action="accept-safety">我已了解，继续</button>
+    </section>
+
+    <section id="view-regions" class="view" data-view="regions" aria-labelledby="regions-title" hidden>
+      <div class="step-row"><button class="text-button" type="button" data-action="back">← 返回</button><span>第 1 步，共 2 步</span></div>
+      <div class="progress" aria-hidden="true"><span style="width:50%"></span></div>
+      <h1 id="regions-title" tabindex="-1">主要是哪里不舒服？</h1>
+      <div id="region-options" class="option-grid"></div>
+    </section>
+
+    <section id="view-symptoms" class="view" data-view="symptoms" aria-labelledby="symptoms-title" hidden>
+      <div class="step-row"><button class="text-button" type="button" data-action="back">← 上一步</button><span>第 2 步，共 2 步</span></div>
+      <div class="progress" aria-hidden="true"><span style="width:100%"></span></div>
+      <p id="selected-region" class="eyebrow"></p>
+      <h1 id="symptoms-title" tabindex="-1">更接近哪一种轻微不适？</h1>
+      <div id="symptom-options" class="option-grid"></div>
+      <p id="symptom-empty" class="empty-state" hidden>该部位的演示内容尚未收录，请返回选择其他部位。</p>
+    </section>
+
+    <section id="view-result" class="view" data-view="result" aria-labelledby="result-title" hidden>
+      <button class="text-button" type="button" data-action="back">← 修改选择</button>
+      <p class="eyebrow">参考结果</p>
+      <h1 id="result-title" tabindex="-1">可了解这些穴位</h1>
+      <p id="result-summary" class="result-summary"></p>
+      <div id="acupoint-results" class="result-grid"></div>
+      <p id="result-empty" class="empty-state" hidden>没有找到可靠的演示数据。请勿自行猜测或继续按压。</p>
+      <div class="notice">仅供日常健康知识参考，不构成诊断或治疗建议。</div>
+      <div class="button-row">
+        <button class="secondary-button" type="button" data-action="restart">重新开始</button>
+        <button class="primary-button" type="button" data-action="home">返回首页</button>
+      </div>
+    </section>
+  </main>
+
+  <noscript><p class="noscript">问诊功能需要启用 JavaScript。你仍可阅读本页的产品定位与安全说明。</p></noscript>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
