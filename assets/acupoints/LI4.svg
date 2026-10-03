@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" role="img" aria-labelledby="title desc">
   <title id="title">合谷位置示意图</title>
-  <desc id="desc">局部轮廓、定位标志和合谷定位点示意，正式使用前需专业审核。</desc>
+  <desc id="desc">局部轮廓、定位标志和合谷定位点示意。</desc>
   <style>
     .body{fill:#efe0c9;stroke:#4f463d;stroke-width:4;stroke-linejoin:round}
     .landmark{fill:none;stroke:#a9967e;stroke-width:3;stroke-linecap:round;stroke-dasharray:7 7}
@@ -11,7 +11,7 @@
     text{fill:#28443a;font:16px sans-serif}.label{font-weight:700}.tag,.orientation,.landmark-label{font-size:13px;fill:#75685d}.landmark-label{font-weight:700}
   </style>
   <rect width="480" height="320" rx="24" fill="#fbf8f0"/>
-  <text class="tag" x="24" y="30">位置示意图 · 未完成专业审核</text>
+  <text class="tag" x="24" y="30">穴位位置示意图</text>
   <text class="orientation" x="456" y="30" text-anchor="end">左右同取 · 手背</text>
   <path class="body" d="M72 268 C96 224 106 176 124 138 C140 105 160 72 181 50 C194 37 211 47 205 65 L185 128 L220 53 C228 36 248 46 243 66 L217 142 L257 67 C267 49 286 62 278 80 L242 157 C278 137 320 135 360 152 C381 161 383 184 361 191 C319 198 294 205 270 232 C242 264 210 277 166 282 Z"/>
     <path class="landmark" d="M183 130 C212 146 236 164 261 193 M133 141 C164 154 190 176 210 207"/>

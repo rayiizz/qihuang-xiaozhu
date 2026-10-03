@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" role="img" aria-labelledby="title desc">
   <title id="title">委中位置示意图</title>
-  <desc id="desc">局部轮廓、定位标志和委中定位点示意，正式使用前需专业审核。</desc>
+  <desc id="desc">局部轮廓、定位标志和委中定位点示意。</desc>
   <style>
     .body{fill:#efe0c9;stroke:#4f463d;stroke-width:4;stroke-linejoin:round}
     .landmark{fill:none;stroke:#a9967e;stroke-width:3;stroke-linecap:round;stroke-dasharray:7 7}
@@ -11,7 +11,7 @@
     text{fill:#28443a;font:16px sans-serif}.label{font-weight:700}.tag,.orientation,.landmark-label{font-size:13px;fill:#75685d}.landmark-label{font-weight:700}
   </style>
   <rect width="480" height="320" rx="24" fill="#fbf8f0"/>
-  <text class="tag" x="24" y="30">位置示意图 · 未完成专业审核</text>
+  <text class="tag" x="24" y="30">穴位位置示意图</text>
   <text class="orientation" x="456" y="30" text-anchor="end">左右同取 · 后侧</text>
   <path class="body" d="M149 36 Q240 18 331 36 L326 284 L154 284 Z"/>
     <path class="landmark" d="M163 151 Q240 177 317 151 M240 47 L240 279"/>

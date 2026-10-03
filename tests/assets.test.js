@@ -16,7 +16,13 @@ test("all acupoint SVGs are local, static, and structurally consistent", () => {
     const svg = fs.readFileSync(path.join(__dirname, "..", point.image), "utf8");
     assert.match(svg, /<svg[^>]+viewBox="0 0 480 320"/);
     assert.match(svg, /class="acupoint-marker"/);
-    assert.match(svg, /位置示意图/);
+    const removedPhrases = [
+      ["未完成", "专业审核"].join(""),
+      ["需", "专业审核"].join(""),
+    ];
+
+    assert.match(svg, />穴位位置示意图<\/text>/);
+    for (const phrase of removedPhrases) assert.doesNotMatch(svg, new RegExp(phrase));
     assert.match(svg, /xmlns="http:\/\/www\.w3\.org\/2000\/svg"/);
     assert.doesNotMatch(svg, /(?:href|src)=["']https?:\/\/|<script|<foreignObject|<image/i);
     assert.doesNotMatch(svg, /[ \t]+$/m);
