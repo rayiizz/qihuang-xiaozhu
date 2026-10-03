@@ -33,3 +33,11 @@ test("document includes safety, keyboard, and no-script affordances", () => {
   assert.match(html, /<noscript>/);
   assert.match(html, /<button[^>]+data-action=/);
 });
+
+test("stylesheet includes responsive, focus, hidden, and reduced-motion rules", () => {
+  const css = fs.readFileSync(path.join(__dirname, "..", "styles.css"), "utf8");
+  assert.match(css, /\[hidden\]/);
+  assert.match(css, /:focus-visible/);
+  assert.match(css, /@media\s*\(max-width:\s*700px\)/);
+  assert.match(css, /prefers-reduced-motion:\s*reduce/);
+});
