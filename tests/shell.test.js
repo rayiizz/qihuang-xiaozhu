@@ -30,7 +30,6 @@ test("document loads local classic scripts in dependency order", () => {
 
 test("document includes safety, keyboard, and no-script affordances", () => {
   assert.match(html, /仅供日常健康知识参考/);
-  assert.match(html, /演示内容尚未完成专业审核/);
   assert.match(html, /<noscript>/);
   assert.match(html, /<button[^>]+data-action=/);
 });
@@ -79,11 +78,27 @@ test("document exposes the approved disclaimer through a shared footer link", ()
   assert.match(disclaimerView, /立即停止自行处理并联系当地急救服务/);
   assert.match(disclaimerView, /不指导针刺、放血、艾灸/);
   assert.match(disclaimerView, /孕妇、儿童、老年人/);
-  assert.match(disclaimerView, /尚未经过执业中医师逐项审核/);
+  assert.match(disclaimerView, /<span>06<\/span> 内容准确性<\/h2>/);
+  assert.match(disclaimerView, /当前穴位资料和图片属于知识参考内容/);
+  assert.match(disclaimerView, /可能存在遗漏、简化或更新不及时/);
   assert.match(disclaimerView, /不会主动上传或保存/);
   assert.match(disclaimerView, /法律规定不得排除或限制的责任/);
   assert.match(disclaimerView, /最后更新：2026年10月3日/);
   assert.match(disclaimerView, /data-action=["']home["']/);
+});
+
+test("document omits obsolete review status while retaining medical safety guidance", () => {
+  const css = fs.readFileSync(path.join(__dirname, "..", "styles.css"), "utf8");
+  const removedPhrases = [
+    ["演示内容尚未完成", "专业审核"].join(""),
+    ["尚未经过执业中医师", "逐项审核"].join(""),
+  ];
+
+  for (const phrase of removedPhrases) assert.doesNotMatch(html, new RegExp(phrase));
+  assert.doesNotMatch(css, /\.review-banner/);
+  assert.match(html, /仅供日常健康知识参考，不构成诊断或治疗建议/);
+  assert.match(html, /立即停止自行处理并联系当地急救服务/);
+  assert.match(html, /穴位图片仅为示意图，不能代替专业取穴/);
 });
 
 test("disclaimer and shared footer have readable responsive styles", () => {

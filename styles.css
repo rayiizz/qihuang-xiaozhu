@@ -141,8 +141,7 @@ button {
   transform: translateY(-50%) rotate(-2deg);
 }
 
-.local-badge,
-.review-banner {
+.local-badge {
   display: inline-flex;
   align-items: center;
   width: fit-content;
@@ -175,19 +174,6 @@ button {
   width: min(1120px, calc(100% - 3rem));
   margin: 0 auto;
   padding: 1.5rem 0 5rem;
-}
-
-.review-banner {
-  margin: 0 0 1.4rem;
-  padding: 0.45rem 0.72rem;
-  border: 1px solid rgba(162, 68, 50, 0.24);
-  color: var(--cinnabar-deep);
-  background: var(--cinnabar-pale);
-}
-
-.review-banner::before {
-  margin-right: 0.4rem;
-  content: "※";
 }
 
 .view {
@@ -865,11 +851,6 @@ a:focus-visible,
   .local-badge {
     max-width: 8.5rem;
     line-height: 1.35;
-  }
-
-  .review-banner {
-    border-radius: 0.6rem;
-    line-height: 1.45;
   }
 
   .entry-card,
