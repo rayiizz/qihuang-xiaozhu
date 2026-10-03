@@ -37,3 +37,14 @@ test("data is immutable", () => {
   assert.ok(Object.isFrozen(data.bodyRegions));
   assert.ok(Object.isFrozen(data.acupoints[0]));
 });
+
+test("every acupoint has unique local image metadata", () => {
+  const paths = new Set();
+  for (const point of data.acupoints) {
+    assert.match(point.image, /^assets\/acupoints\/[A-Z0-9-]+\.svg$/);
+    assert.ok(point.imageAlt.length >= 18, `${point.name} needs a descriptive imageAlt`);
+    assert.match(point.imageAlt, new RegExp(point.name));
+    paths.add(point.image);
+  }
+  assert.equal(paths.size, data.acupoints.length);
+});
