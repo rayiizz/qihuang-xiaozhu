@@ -48,3 +48,23 @@ test("every acupoint has unique local image metadata", () => {
   }
   assert.equal(paths.size, data.acupoints.length);
 });
+
+test("product introductions contain four complete neutral records", () => {
+  assert.equal(data.products.length, 4);
+  assert.deepEqual(data.products.map((item) => item.name), [
+    "闪亮菁华眼贴",
+    "易灸灸蕲艾敷贴",
+    "全元倍生·小双瓶",
+    "芝麻丸",
+  ]);
+  for (const product of data.products) {
+    assert.match(product.image, /^assets\/products\/[a-z-]+\.(?:jpg|png)$/);
+    assert.ok(product.imageAlt.length >= 8);
+    assert.ok(product.type.length > 0);
+    assert.ok(product.summary.length > 0);
+    assert.ok(product.composition.length > 0);
+    assert.ok(product.usage.length > 0);
+    assert.ok(product.caution.length > 0);
+  }
+  assert.equal(new Set(data.products.map((item) => item.id)).size, 4);
+});
