@@ -48,6 +48,21 @@ test("product introduction includes the agreed applicable-scope section", () => 
   assert.match(productView, /<h2>适用范围<\/h2>/);
 });
 
+test("product view exposes the four-card grid and neutral use boundary", () => {
+  const productView = html.match(/id=["']view-product["'][\s\S]*?<\/section>/i)?.[0] || "";
+  assert.match(productView, /id=["']product-grid["']/);
+  assert.match(productView, /产品信息来自所提供资料/);
+  assert.match(productView, /不能替代医疗建议/);
+});
+
+test("product grid has card, disclosure, and mobile styles", () => {
+  const css = fs.readFileSync(path.join(__dirname, "..", "styles.css"), "utf8");
+  assert.match(css, /\.product-grid\s*\{/);
+  assert.match(css, /\.product-card__media\s*\{/);
+  assert.match(css, /\.product-card details\s*\{/);
+  assert.match(css, /@media\s*\(max-width:\s*700px\)[\s\S]*\.product-grid/);
+});
+
 test("stylesheet includes responsive, focus, hidden, and reduced-motion rules", () => {
   const css = fs.readFileSync(path.join(__dirname, "..", "styles.css"), "utf8");
   assert.match(css, /\[hidden\]/);
