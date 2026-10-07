@@ -110,6 +110,54 @@
     return article;
   }
 
+  function createProductCard(doc, product) {
+    const article = doc.createElement("article");
+    article.className = "product-card";
+
+    const media = doc.createElement("div");
+    media.className = "product-card__media";
+    const image = doc.createElement("img");
+    image.src = product.image;
+    image.alt = product.imageAlt;
+    image.loading = "lazy";
+    image.decoding = "async";
+    image.addEventListener("error", function () {
+      image.hidden = true;
+    }, { once: true });
+    media.appendChild(image);
+
+    const body = doc.createElement("div");
+    body.className = "product-card__body";
+    const type = doc.createElement("p");
+    type.className = "product-card__type";
+    type.textContent = product.type;
+    const heading = doc.createElement("h3");
+    heading.textContent = product.name;
+    const summary = doc.createElement("p");
+    summary.className = "product-card__summary";
+    summary.textContent = product.summary;
+
+    const details = doc.createElement("details");
+    const toggle = doc.createElement("summary");
+    toggle.textContent = "查看基础信息";
+    const list = doc.createElement("dl");
+    [
+      ["主要成分 / 结构", product.composition],
+      ["基本用法", product.usage],
+      ["注意事项", product.caution],
+    ].forEach(([label, value]) => {
+      const term = doc.createElement("dt");
+      term.textContent = label;
+      const description = doc.createElement("dd");
+      description.textContent = value;
+      list.append(term, description);
+    });
+    details.append(toggle, list);
+    body.append(type, heading, summary, details);
+    article.append(media, body);
+    return article;
+  }
+
   function mount(doc, data) {
     if (!data) {
       const appError = doc.querySelector("#app-error");
@@ -133,6 +181,11 @@
       item.textContent = message;
       redFlagList.appendChild(item);
     });
+
+    const productGrid = doc.querySelector("#product-grid");
+    if (productGrid && Array.isArray(data.products)) {
+      productGrid.replaceChildren(...data.products.map((product) => createProductCard(doc, product)));
+    }
 
     function render() {
       const model = buildViewModel(state, data);
@@ -184,5 +237,5 @@
     render();
   }
 
-  return { createInitialState, getSymptoms, getAcupoints, reduce, buildViewModel, createPointCard, mount };
+  return { createInitialState, getSymptoms, getAcupoints, reduce, buildViewModel, createPointCard, createProductCard, mount };
 });

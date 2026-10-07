@@ -112,3 +112,23 @@ test("point card renders an accessible figure and hides only the figure on image
   assert.equal(figure.hidden, true);
   assert.equal(location.textContent, point.location);
 });
+
+test("product card renders image, summary, details, and safe image fallback", () => {
+  const doc = { createElement: (tag) => new FakeElement(tag) };
+  const product = data.products[0];
+  const card = app.createProductCard(doc, product);
+  const nodes = flatten(card);
+  const image = nodes.find((item) => item.tagName === "img");
+  const details = nodes.find((item) => item.tagName === "details");
+  const text = nodes.map((item) => item.textContent).join(" ");
+
+  assert.equal(image.src, product.image);
+  assert.equal(image.alt, product.imageAlt);
+  assert.equal(image.loading, "lazy");
+  assert.ok(details);
+  assert.match(text, /主要成分 \/ 结构/);
+  assert.match(text, /基本用法/);
+  assert.match(text, /注意事项/);
+  image.dispatch("error");
+  assert.equal(image.hidden, true);
+});
