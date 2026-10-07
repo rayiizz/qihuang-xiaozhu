@@ -55,3 +55,11 @@ test("each acupoint SVG states bilateral orientation and required landmarks", ()
     }
   }
 });
+
+test("every product uses a substantial local image", () => {
+  for (const product of data.products) {
+    const imagePath = path.join(__dirname, "..", product.image);
+    assert.ok(fs.existsSync(imagePath), `${product.name} image is missing`);
+    assert.ok(fs.statSync(imagePath).size > 1024, `${product.name} image is unexpectedly small`);
+  }
+});
