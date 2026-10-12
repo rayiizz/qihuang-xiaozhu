@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" role="img" aria-labelledby="title desc">
+  <title id="title">后溪位置示意图</title>
+  <desc id="desc">局部轮廓、定位标志和后溪定位点示意。</desc>
+  <style>
+    .body{fill:#efe0c9;stroke:#4f463d;stroke-width:4;stroke-linejoin:round}
+    .landmark{fill:none;stroke:#a9967e;stroke-width:3;stroke-linecap:round;stroke-dasharray:7 7}
+    .landmark-fill{fill:#a9967e}
+    .leader{fill:none;stroke:#a24432;stroke-width:3}
+    .acupoint-marker{fill:#a24432;stroke:#f2c8b7;stroke-width:9}
+    text{fill:#28443a;font:16px sans-serif}.label{font-weight:700}.tag,.orientation,.landmark-label{font-size:13px;fill:#75685d}.landmark-label{font-weight:700}
+  </style>
+  <rect width="480" height="320" rx="24" fill="#fbf8f0"/>
+  <text class="tag" x="24" y="30">穴位位置示意图</text>
+  <text class="orientation" x="456" y="30" text-anchor="end">左右同取 · 小指侧</text>
+  <path class="body" d="M70 226 C112 191 142 164 180 150 C218 136 260 136 306 148 L401 181 C420 188 418 211 398 218 L306 235 C256 247 207 270 151 280 L84 279 Z"/>
+    <path class="landmark" d="M168 179 Q206 199 252 198 M145 208 Q193 230 248 221"/>
+    <circle class="landmark-fill" cx="252" cy="198" r="6"/>
+    <path class="landmark" d="M252 198 L286 173"/>
+    <text class="landmark-label" x="290" y="169">第五掌指关节</text>
+    <text x="82" y="305">小指侧手部 · 握拳示意</text>
+  <path class="leader" d="M244 218 L355 265"/>
+  <circle class="acupoint-marker" cx="244" cy="218" r="9"/>
+  <rect x="317" y="241" width="76" height="34" rx="10" fill="#17382f"/>
+  <text class="label" x="355" y="263" text-anchor="middle" fill="#fffaf2">后溪</text>
+</svg>

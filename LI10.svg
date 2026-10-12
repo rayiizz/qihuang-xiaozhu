@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" role="img" aria-labelledby="title desc">
+  <title id="title">手三里位置示意图</title>
+  <desc id="desc">局部轮廓、定位标志和手三里定位点示意。</desc>
+  <style>
+    .body{fill:#efe0c9;stroke:#4f463d;stroke-width:4;stroke-linejoin:round}
+    .landmark{fill:none;stroke:#a9967e;stroke-width:3;stroke-linecap:round;stroke-dasharray:7 7}
+    .landmark-fill{fill:#a9967e}
+    .leader{fill:none;stroke:#a24432;stroke-width:3}
+    .acupoint-marker{fill:#a24432;stroke:#f2c8b7;stroke-width:9}
+    text{fill:#28443a;font:16px sans-serif}.label{font-weight:700}.tag,.orientation,.landmark-label{font-size:13px;fill:#75685d}.landmark-label{font-weight:700}
+  </style>
+  <rect width="480" height="320" rx="24" fill="#fbf8f0"/>
+  <text class="tag" x="24" y="30">穴位位置示意图</text>
+  <text class="orientation" x="456" y="30" text-anchor="end">左右同取 · 前臂背侧</text>
+  <path class="body" d="M105 75 Q143 45 181 58 L364 126 Q402 142 390 181 L360 253 Q347 283 313 272 L124 208 Q82 193 82 152 Z"/>
+    <path class="landmark" d="M112 190 Q231 213 349 252 M128 169 Q242 191 365 226 M195 99 L153 205 M234 111 L194 217"/>
+    <text x="92" y="305">前臂与腕部 · 肘横纹与腕横纹</text>
+  <path class="leader" d="M212 143 L325 80"/>
+  <circle class="acupoint-marker" cx="212" cy="143" r="9"/>
+  <rect x="287" y="56" width="76" height="34" rx="10" fill="#17382f"/>
+  <text class="label" x="325" y="78" text-anchor="middle" fill="#fffaf2">手三里</text>
+</svg>

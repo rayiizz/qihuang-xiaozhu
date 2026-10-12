@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" role="img" aria-labelledby="title desc">
+  <title id="title">阳陵泉位置示意图</title>
+  <desc id="desc">局部轮廓、定位标志和阳陵泉定位点示意。</desc>
+  <style>
+    .body{fill:#efe0c9;stroke:#4f463d;stroke-width:4;stroke-linejoin:round}
+    .landmark{fill:none;stroke:#a9967e;stroke-width:3;stroke-linecap:round;stroke-dasharray:7 7}
+    .landmark-fill{fill:#a9967e}
+    .leader{fill:none;stroke:#a24432;stroke-width:3}
+    .acupoint-marker{fill:#a24432;stroke:#f2c8b7;stroke-width:9}
+    text{fill:#28443a;font:16px sans-serif}.label{font-weight:700}.tag,.orientation,.landmark-label{font-size:13px;fill:#75685d}.landmark-label{font-weight:700}
+  </style>
+  <rect width="480" height="320" rx="24" fill="#fbf8f0"/>
+  <text class="tag" x="24" y="30">穴位位置示意图</text>
+  <text class="orientation" x="456" y="30" text-anchor="end">左右同取 · 外侧</text>
+  <path class="body" d="M149 40 Q240 17 331 40 L343 108 Q326 145 307 166 L294 287 L186 287 L173 166 Q154 145 137 108 Z"/>
+    <circle class="landmark" cx="240" cy="101" r="48"/>
+    <path class="landmark" d="M214 143 L207 276 M278 143 L287 276"/>
+    <circle class="landmark-fill" cx="307" cy="143" r="6"/>
+    <path class="landmark" d="M307 143 L329 119"/>
+    <text class="landmark-label" x="333" y="115">腓骨小头</text>
+    <text x="125" y="309">膝与小腿前外侧</text>
+  <path class="leader" d="M313 143 L408 91"/>
+  <circle class="acupoint-marker" cx="313" cy="143" r="9"/>
+  <rect x="370" y="67" width="76" height="34" rx="10" fill="#17382f"/>
+  <text class="label" x="408" y="89" text-anchor="middle" fill="#fffaf2">阳陵泉</text>
+</svg>

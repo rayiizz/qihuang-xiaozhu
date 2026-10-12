@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="完全离线的日常穴位知识参考工具">
+  <title>岐黄小助｜本地穴位参考</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+  <header class="site-header">
+    <button class="brand" type="button" data-action="home" aria-label="返回首页">岐黄小助</button>
+    <span class="local-badge">本地运行 · 隐私优先</span>
+  </header>
+
+  <main id="main-content" class="app-shell">
+    <p id="app-error" class="empty-state" role="alert" hidden>问诊数据未能加载，请确认 data.js 与 index.html 位于同一文件夹后刷新页面。</p>
+
+    <section id="view-home" class="view is-active" data-view="home" aria-labelledby="home-title">
+      <div class="hero-copy">
+        <p class="eyebrow">日常轻微不适的穴位参考</p>
+        <h1 id="home-title" tabindex="-1">从一处不适开始，找到一份温和参考。</h1>
+        <p>完全离线运行，不上传你的选择。内容仅作健康知识参考。</p>
+      </div>
+      <div class="entry-grid">
+        <button class="entry-card entry-card--primary" type="button" data-action="open-consultation" data-requires-data>
+          <span class="entry-kicker">主要入口</span>
+          <span class="entry-title">在线问诊</span>
+          <span>逐步选择不适部位与具体感受</span>
+        </button>
+        <button class="entry-card" type="button" data-action="open-product">
+          <span class="entry-kicker">了解更多</span>
+          <span class="entry-title">产品介绍</span>
+          <span>了解理念、能力、隐私与使用边界</span>
+        </button>
+      </div>
+      <p class="legal-note">仅供日常健康知识参考，不构成诊断或治疗建议。</p>
+    </section>
+
+    <section id="view-product" class="view" data-view="product" aria-labelledby="product-title" hidden>
+      <button class="text-button" type="button" data-action="back">← 返回</button>
+      <p class="eyebrow">产品介绍</p>
+      <h1 id="product-title" tabindex="-1">四款日常产品，信息清楚再选择</h1>
+      <p class="product-intro">从产品形态、主要组成到基本用法，先了解，再按自己的需要判断。</p>
+      <div id="product-grid" class="product-grid" aria-label="产品列表"></div>
+      <p class="product-boundary">产品信息来自所提供资料，具体配料、用法、适用人群与保质信息以实际包装说明为准；本页内容不能替代医疗建议。</p>
+      <h2 class="section-heading">关于岐黄小助</h2>
+      <div class="info-grid">
+        <article><h2>产品理念</h2><p>把复杂的穴位知识整理为清楚、克制、易理解的日常参考。</p></article>
+        <article><h2>主要能力</h2><p>通过部位与不适的逐步选择，展示简洁的穴位名称和定位。</p></article>
+        <article><h2>隐私方式</h2><p>网页完全在本机运行，不要求账号，不保存或上传当次选择。</p></article>
+        <article><h2>适用范围</h2><p>面向常见、轻微且非紧急不适的日常穴位知识查询。</p></article>
+        <article><h2>使用边界</h2><p>不诊断疾病，不处理急症，不替代医生或专业治疗。</p></article>
+      </div>
+    </section>
+
+    <section id="view-safety" class="view" data-view="safety" aria-labelledby="safety-title" hidden>
+      <button class="text-button" type="button" data-action="back">← 返回</button>
+      <p class="eyebrow">开始前请确认</p>
+      <h1 id="safety-title" tabindex="-1">以下情况请停止自助查询并及时就医</h1>
+      <ul id="red-flag-list" class="warning-list"></ul>
+      <div class="notice">不要按压破损、感染、红肿或明显疼痛的皮肤；孕期或有严重基础疾病时先咨询专业人员。</div>
+      <button class="primary-button" type="button" data-action="accept-safety" data-requires-data>我已了解，继续</button>
+    </section>
+
+    <section id="view-regions" class="view" data-view="regions" aria-labelledby="regions-title" hidden>
+      <div class="step-row"><button class="text-button" type="button" data-action="back">← 返回</button><span>第 1 步，共 2 步</span></div>
+      <div class="progress" aria-hidden="true"><span style="width:50%"></span></div>
+      <h1 id="regions-title" tabindex="-1">主要是哪里不舒服？</h1>
+      <div id="region-options" class="option-grid"></div>
+    </section>
+
+    <section id="view-symptoms" class="view" data-view="symptoms" aria-labelledby="symptoms-title" hidden>
+      <div class="step-row"><button class="text-button" type="button" data-action="back">← 上一步</button><span>第 2 步，共 2 步</span></div>
+      <div class="progress" aria-hidden="true"><span style="width:100%"></span></div>
+      <p id="selected-region" class="eyebrow"></p>
+      <h1 id="symptoms-title" tabindex="-1">更接近哪一种轻微不适？</h1>
+      <div id="symptom-options" class="option-grid"></div>
+      <p id="symptom-empty" class="empty-state" hidden>该部位的演示内容尚未收录，请返回选择其他部位。</p>
+    </section>
+
+    <section id="view-result" class="view" data-view="result" aria-labelledby="result-title" hidden>
+      <button class="text-button" type="button" data-action="back">← 修改选择</button>
+      <p class="eyebrow">参考结果</p>
+      <h1 id="result-title" tabindex="-1">可了解这些穴位</h1>
+      <p id="result-summary" class="result-summary"></p>
+      <div id="acupoint-results" class="result-grid"></div>
+      <p id="result-empty" class="empty-state" hidden>没有找到可靠的演示数据。请勿自行猜测或继续按压。</p>
+      <div class="notice">仅供日常健康知识参考，不构成诊断或治疗建议。</div>
+      <div class="button-row">
+        <button class="secondary-button" type="button" data-action="restart">重新开始</button>
+        <button class="primary-button" type="button" data-action="home">返回首页</button>
+      </div>
+    </section>
+
+    <section id="view-disclaimer" class="view disclaimer-view" data-view="disclaimer" aria-labelledby="disclaimer-title" hidden>
+      <button class="text-button" type="button" data-action="home">← 返回首页</button>
+      <p class="eyebrow">使用边界与安全说明</p>
+      <h1 id="disclaimer-title" tabindex="-1">免责声明与使用须知</h1>
+      <p class="disclaimer-lead">请在使用“在线问诊”和穴位参考功能前阅读以下内容。</p>
+
+      <div class="disclaimer-sections">
+        <section aria-labelledby="disclaimer-nature">
+          <h2 id="disclaimer-nature"><span>01</span> 产品性质</h2>
+          <p>本产品仅提供中医穴位与日常健康知识参考，不是医疗机构或互联网医院，不建立医患关系。“在线问诊”仅为功能名称，实际属于健康信息引导。</p>
+        </section>
+        <section aria-labelledby="disclaimer-medical">
+          <h2 id="disclaimer-medical"><span>02</span> 不构成诊疗建议</h2>
+          <p>页面内容、穴位推荐和操作说明不构成医学诊断、处方、个体化治疗方案或疗效保证，也不能代替执业医师、中医师或其他合格医疗专业人员的判断。用户不应因使用本产品而延误、取消或改变正规诊疗。</p>
+        </section>
+        <section class="disclaimer-section--urgent" aria-labelledby="disclaimer-urgent">
+          <h2 id="disclaimer-urgent"><span>03</span> 紧急与严重症状</h2>
+          <p>若出现胸痛、呼吸困难、意识异常、突发肢体无力或言语不清、严重出血、严重过敏、持续高热、剧烈或快速加重的疼痛等紧急或严重症状，应立即停止自行处理并联系当地急救服务或尽快前往正规医疗机构。</p>
+        </section>
+        <section aria-labelledby="disclaimer-location">
+          <h2 id="disclaimer-location"><span>04</span> 穴位图片与操作边界</h2>
+          <p>穴位图片仅为示意图，不能代替专业取穴，且个体体型与解剖位置存在差异。本产品只提供非侵入性的日常按压参考，不指导针刺、放血、艾灸或其他专业、侵入性操作。皮肤破损、感染、明显红肿或剧烈疼痛处不应自行按压；操作中若出现明显疼痛、头晕、恶心或其他不适，应立即停止。</p>
+        </section>
+        <section aria-labelledby="disclaimer-groups">
+          <h2 id="disclaimer-groups"><span>05</span> 特殊人群</h2>
+          <p>孕妇、儿童、老年人，以及患有慢性疾病、凝血问题、正在服药或近期接受手术的人群，在尝试任何穴位刺激前应先咨询合格的医疗专业人员。</p>
+        </section>
+        <section aria-labelledby="disclaimer-review">
+          <h2 id="disclaimer-review"><span>06</span> 内容准确性</h2>
+          <p>当前穴位资料和图片属于知识参考内容，可能存在遗漏、简化或更新不及时的情况，不保证完全准确、完整或适用于每一位用户。</p>
+        </section>
+        <section aria-labelledby="disclaimer-privacy">
+          <h2 id="disclaimer-privacy"><span>07</span> 隐私与本地运行</h2>
+          <p>本产品在用户设备本地运行，不要求注册，也不会主动上传或保存用户在问诊流程中填写的身体状况。用户仍需自行管理设备、浏览器及本地文件的安全。</p>
+        </section>
+        <section aria-labelledby="disclaimer-liability">
+          <h2 id="disclaimer-liability"><span>08</span> 责任边界</h2>
+          <p>用户应结合自身情况谨慎判断和使用。对于将本产品内容误认为医学诊断、未及时就医或不当自行操作所产生的损失，开发者在适用法律允许的范围内不承担相应责任；法律规定不得排除或限制的责任不受本条影响。</p>
+        </section>
+      </div>
+
+      <p class="disclaimer-updated">最后更新：2026年10月3日</p>
+      <button class="primary-button" type="button" data-action="home">返回首页</button>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>岐黄小助 · 本地穴位知识参考</p>
+    <a class="footer-link" href="#view-disclaimer" data-action="open-disclaimer">免责声明</a>
+  </footer>
+
+  <noscript>
+    <section class="noscript" aria-labelledby="noscript-title">
+      <h2 id="noscript-title">本地穴位参考工具</h2>
+      <p><strong>问诊功能需要启用 JavaScript。</strong>启用后可逐步选择不适部位与具体感受。</p>
+      <h3>产品定位</h3>
+      <p>这是一款完全离线的日常轻微不适穴位知识参考工具，不要求账号，也不上传你的选择。</p>
+      <h3>安全提醒</h3>
+      <p>仅供日常健康知识参考，不构成诊断或治疗建议。若出现胸痛、呼吸困难、突然偏瘫、意识异常或其他紧急不适，请停止自助查询并立即就医或联系急救。</p>
+    </section>
+  </noscript>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

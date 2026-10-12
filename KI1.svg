@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" role="img" aria-labelledby="title desc">
+  <title id="title">涌泉位置示意图</title>
+  <desc id="desc">局部轮廓、定位标志和涌泉定位点示意。</desc>
+  <style>
+    .body{fill:#efe0c9;stroke:#4f463d;stroke-width:4;stroke-linejoin:round}
+    .landmark{fill:none;stroke:#a9967e;stroke-width:3;stroke-linecap:round;stroke-dasharray:7 7}
+    .landmark-fill{fill:#a9967e}
+    .leader{fill:none;stroke:#a24432;stroke-width:3}
+    .acupoint-marker{fill:#a24432;stroke:#f2c8b7;stroke-width:9}
+    text{fill:#28443a;font:16px sans-serif}.label{font-weight:700}.tag,.orientation,.landmark-label{font-size:13px;fill:#75685d}.landmark-label{font-weight:700}
+  </style>
+  <rect width="480" height="320" rx="24" fill="#fbf8f0"/>
+  <text class="tag" x="24" y="30">穴位位置示意图</text>
+  <text class="orientation" x="456" y="30" text-anchor="end">左右同取 · 足底</text>
+  <path class="body" d="M171 289 C128 270 111 231 122 190 C131 155 149 134 151 98 C154 52 183 29 222 37 C262 45 287 82 295 126 C305 182 282 248 239 284 C219 300 193 300 171 289 Z"/>
+    <path class="landmark" d="M156 122 Q214 144 284 125 M149 170 Q211 190 279 170"/>
+    <text class="landmark-label" x="293" y="126">趾根</text>
+    <path class="landmark" d="M266 193 Q255 226 231 250"/>
+    <text class="landmark-label" x="273" y="231">足弓</text>
+    <text x="143" y="310">足底前部 · 左右同取</text>
+  <path class="leader" d="M213 157 L356 111"/>
+  <circle class="acupoint-marker" cx="213" cy="157" r="9"/>
+  <rect x="318" y="87" width="76" height="34" rx="10" fill="#17382f"/>
+  <text class="label" x="356" y="109" text-anchor="middle" fill="#fffaf2">涌泉</text>
+</svg>

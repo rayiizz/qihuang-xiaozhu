@@ -1,0 +1,241 @@
+(function (root, factory) {
+  const api = factory();
+  if (typeof module === "object" && module.exports) module.exports = api;
+  root.TCM_APP = api;
+  if (root.document) root.document.addEventListener("DOMContentLoaded", function () {
+    api.mount(root.document, root.TCM_DATA);
+  });
+})(typeof globalThis !== "undefined" ? globalThis : this, function () {
+  const initial = Object.freeze({ view: "home", regionId: null, symptomId: null });
+
+  function createInitialState() {
+    return { ...initial };
+  }
+
+  function getSymptoms(data, regionId) {
+    if (!data || !Array.isArray(data.symptoms)) return [];
+    return data.symptoms.filter((item) => item.regionId === regionId);
+  }
+
+  function getAcupoints(data, symptomId) {
+    if (!data || !Array.isArray(data.symptoms) || !Array.isArray(data.acupoints)) return [];
+    const symptom = data.symptoms.find((item) => item.id === symptomId);
+    if (!symptom) return [];
+    const byId = new Map(data.acupoints.map((item) => [item.id, item]));
+    return symptom.acupointIds.map((id) => byId.get(id)).filter(Boolean).slice(0, 3);
+  }
+
+  function reduce(state, event, data) {
+    switch (event.type) {
+      case "OPEN_CONSULTATION": return { view: "safety", regionId: null, symptomId: null };
+      case "OPEN_PRODUCT": return { view: "product", regionId: null, symptomId: null };
+      case "OPEN_DISCLAIMER": return { view: "disclaimer", regionId: null, symptomId: null };
+      case "ACCEPT_SAFETY": return { view: "regions", regionId: null, symptomId: null };
+      case "SELECT_REGION": {
+        const exists = data.bodyRegions.some((item) => item.id === event.id);
+        return exists ? { view: "symptoms", regionId: event.id, symptomId: null } : state;
+      }
+      case "SELECT_SYMPTOM": {
+        const exists = data.symptoms.some((item) => item.id === event.id && item.regionId === state.regionId);
+        return exists ? { ...state, view: "result", symptomId: event.id } : state;
+      }
+      case "BACK":
+        if (state.view === "result") return { ...state, view: "symptoms", symptomId: null };
+        if (state.view === "symptoms") return { view: "regions", regionId: null, symptomId: null };
+        if (state.view === "regions") return { view: "safety", regionId: null, symptomId: null };
+        return createInitialState();
+      case "RESTART": return { view: "regions", regionId: null, symptomId: null };
+      case "HOME": return createInitialState();
+      default: return state;
+    }
+  }
+
+  function buildViewModel(state, data) {
+    const region = data.bodyRegions.find((item) => item.id === state.regionId) || null;
+    const symptom = data.symptoms.find((item) => item.id === state.symptomId) || null;
+    return {
+      ...state,
+      region,
+      symptom,
+      symptoms: getSymptoms(data, state.regionId),
+      acupoints: getAcupoints(data, state.symptomId),
+    };
+  }
+
+  function makeButton(doc, item, action) {
+    const button = doc.createElement("button");
+    button.type = "button";
+    button.className = "option-card";
+    button.dataset.action = action;
+    button.dataset.id = item.id;
+    const title = doc.createElement("strong");
+    title.textContent = item.name;
+    button.appendChild(title);
+    if (item.hint) {
+      const hint = doc.createElement("span");
+      hint.textContent = item.hint;
+      button.appendChild(hint);
+    }
+    return button;
+  }
+
+  function createPointCard(doc, point) {
+    const article = doc.createElement("article");
+    article.className = "point-card";
+
+    const heading = doc.createElement("h2");
+    heading.textContent = point.name;
+
+    const figure = doc.createElement("figure");
+    figure.className = "point-figure";
+    const caption = doc.createElement("figcaption");
+    caption.textContent = "位置示意图";
+    const image = doc.createElement("img");
+    image.src = point.image;
+    image.alt = point.imageAlt;
+    image.loading = "lazy";
+    image.decoding = "async";
+    image.addEventListener("error", function () {
+      figure.hidden = true;
+    }, { once: true });
+    figure.append(caption, image);
+
+    const location = doc.createElement("p");
+    location.className = "point-location";
+    location.textContent = point.location;
+
+    const caution = doc.createElement("small");
+    caution.textContent = point.caution;
+    article.append(heading, figure, location, caution);
+    return article;
+  }
+
+  function createProductCard(doc, product) {
+    const article = doc.createElement("article");
+    article.className = "product-card";
+
+    const media = doc.createElement("div");
+    media.className = "product-card__media";
+    const image = doc.createElement("img");
+    image.src = product.image;
+    image.alt = product.imageAlt;
+    image.loading = "lazy";
+    image.decoding = "async";
+    image.addEventListener("error", function () {
+      image.hidden = true;
+    }, { once: true });
+    media.appendChild(image);
+
+    const body = doc.createElement("div");
+    body.className = "product-card__body";
+    const type = doc.createElement("p");
+    type.className = "product-card__type";
+    type.textContent = product.type;
+    const heading = doc.createElement("h3");
+    heading.textContent = product.name;
+    const summary = doc.createElement("p");
+    summary.className = "product-card__summary";
+    summary.textContent = product.summary;
+
+    const details = doc.createElement("details");
+    const toggle = doc.createElement("summary");
+    toggle.textContent = "查看基础信息";
+    const list = doc.createElement("dl");
+    [
+      ["主要成分 / 结构", product.composition],
+      ["基本用法", product.usage],
+      ["注意事项", product.caution],
+    ].forEach(([label, value]) => {
+      const term = doc.createElement("dt");
+      term.textContent = label;
+      const description = doc.createElement("dd");
+      description.textContent = value;
+      list.append(term, description);
+    });
+    details.append(toggle, list);
+    body.append(type, heading, summary, details);
+    article.append(media, body);
+    return article;
+  }
+
+  function mount(doc, data) {
+    if (!data) {
+      const appError = doc.querySelector("#app-error");
+      if (appError) appError.hidden = false;
+      Array.from(doc.querySelectorAll("[data-requires-data]")).forEach((control) => {
+        control.disabled = true;
+      });
+      return;
+    }
+    let state = createInitialState();
+    const views = Array.from(doc.querySelectorAll("[data-view]"));
+    const regionOptions = doc.querySelector("#region-options");
+    const symptomOptions = doc.querySelector("#symptom-options");
+    const pointResults = doc.querySelector("#acupoint-results");
+    const symptomEmpty = doc.querySelector("#symptom-empty");
+    const resultEmpty = doc.querySelector("#result-empty");
+    const redFlagList = doc.querySelector("#red-flag-list");
+
+    data.safetyNotices.redFlags.forEach((message) => {
+      const item = doc.createElement("li");
+      item.textContent = message;
+      redFlagList.appendChild(item);
+    });
+
+    const productGrid = doc.querySelector("#product-grid");
+    if (productGrid && Array.isArray(data.products)) {
+      productGrid.replaceChildren(...data.products.map((product) => createProductCard(doc, product)));
+    }
+
+    function render() {
+      const model = buildViewModel(state, data);
+      views.forEach((view) => {
+        const active = view.dataset.view === state.view;
+        view.hidden = !active;
+        view.classList.toggle("is-active", active);
+      });
+
+      if (state.view === "regions") {
+        regionOptions.replaceChildren(...data.bodyRegions.map((item) => makeButton(doc, item, "select-region")));
+      }
+
+      if (state.view === "symptoms") {
+        doc.querySelector("#selected-region").textContent = model.region ? model.region.name : "";
+        symptomOptions.replaceChildren(...model.symptoms.map((item) => makeButton(doc, item, "select-symptom")));
+        symptomEmpty.hidden = model.symptoms.length > 0;
+      }
+
+      if (state.view === "result") {
+        doc.querySelector("#result-summary").textContent = model.symptom ? `你选择了：${model.symptom.name}` : "";
+        const cards = model.acupoints.map((point) => createPointCard(doc, point));
+        pointResults.replaceChildren(...cards);
+        resultEmpty.hidden = cards.length > 0;
+      }
+
+      const activeHeading = doc.querySelector(`[data-view="${state.view}"] h1`);
+      if (activeHeading) activeHeading.focus();
+    }
+
+    doc.addEventListener("click", (event) => {
+      const control = event.target.closest("[data-action]");
+      if (!control) return;
+      const actionMap = {
+        "open-consultation": "OPEN_CONSULTATION",
+        "open-product": "OPEN_PRODUCT",
+        "open-disclaimer": "OPEN_DISCLAIMER",
+        "accept-safety": "ACCEPT_SAFETY",
+        "select-region": "SELECT_REGION",
+        "select-symptom": "SELECT_SYMPTOM",
+        back: "BACK",
+        restart: "RESTART",
+        home: "HOME",
+      };
+      state = reduce(state, { type: actionMap[control.dataset.action], id: control.dataset.id }, data);
+      render();
+    });
+
+    render();
+  }
+
+  return { createInitialState, getSymptoms, getAcupoints, reduce, buildViewModel, createPointCard, createProductCard, mount };
+});
